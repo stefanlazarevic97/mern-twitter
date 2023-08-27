@@ -6,6 +6,8 @@ const cors = require('cors');
 const { isProduction } = require('./config/keys.js');
 const debug = require('debug');
 
+require('./models/User');
+
 const usersRouter = require('./routes/api/users');
 const tweetsRouter = require('./routes/api/tweets');
 const csrfRouter = require('./routes/api/csrf');
@@ -45,7 +47,7 @@ app.use((err, req, res, next) => {
     serverErrorLogger(err);
     const statusCode = err.statusCode || 500;
     res.status(statusCode);
-    
+
     res.json({
         message: err.message,
         statusCode,
