@@ -1,9 +1,13 @@
 import jwtFetch from './jwt';
 
+// CONSTANTS
+
 const RECEIVE_CURRENT_USER = "session/RECEIVE_CURRENT_USER";
 const RECEIVE_SESSION_ERRORS = "session/RECEIVE_SESSION_ERRORS";
 const CLEAR_SESSION_ERRORS = "session/CLEAR_SESSION_ERRORS";
 export const RECEIVE_USER_LOGOUT = "session/RECEIVE_USER_LOGOUT";
+
+// ACTION CREATORS
 
 const receiveCurrentUser = currentUser => ({
     type: RECEIVE_CURRENT_USER,
@@ -22,6 +26,8 @@ const logoutUser = () => ({
 export const clearSessionErrors = () => ({
     type: CLEAR_SESSION_ERRORS
 });
+
+// THUNK ACTION CREATORS
 
 export const signup = user => startSession(user, 'api/users/register');
 export const login = user => startSession(user, 'api/users/login');
@@ -49,6 +55,14 @@ export const logout = () => dispatch => {
     localStorage.removeItem('jwtToken');
     dispatch(logoutUser());
 };
+
+export const getCurrentUser = () => async dispatch => {
+    const res = await jwtFetch('/api/users/current');
+    const user = await res.json();
+    return dispatch(receiveCurrentUser(user));
+};
+
+// REDUCERS
 
 const initialState = {
     user: undefined
