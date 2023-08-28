@@ -1,0 +1,46 @@
+/* Basic styling for the NavBar component */
+
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    color: #4a90e2;
+    margin-bottom: 20px;
+}
+
+.links-nav,
+.links-auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.links-nav a,
+.links-auth a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.links-nav a:hover,
+.links-auth a:hover {
+    background-color: #357abD;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #e94e77;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #d83367;
+}
