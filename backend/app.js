@@ -8,6 +8,7 @@ const debug = require('debug');
 
 require('./models/User');
 require('./config/passport');
+require('./models/Tweet');
 
 const usersRouter = require('./routes/api/users');
 const tweetsRouter = require('./routes/api/tweets');
