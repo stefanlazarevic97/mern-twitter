@@ -6,6 +6,8 @@ const User = mongoose.model('User');
 const passport = require('passport');
 const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
+const validateRegisterInput = require('../../validations/register');
+const validateLoginInput = require('../../validations/login');
 
 router.get('/', function(req, res, next) {
     res.json({
@@ -28,7 +30,7 @@ router.get('/current', restoreUser, (req, res) => {
     });
 });
 
-router.post('/register', async (req, res, next) => {
+router.post('/register', validateRegisterInput, async (req, res, next) => {
     const user = await User.findOne({
         $or: [{ email: req.body.email }, { username: req.body.username }]
     });
@@ -72,7 +74,7 @@ router.post('/register', async (req, res, next) => {
     });
 });
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', validateLoginInput, async (req, res, next) => {
     passport.authenticate('local', async function(err, user) {
         if (err) return next(err);
 
